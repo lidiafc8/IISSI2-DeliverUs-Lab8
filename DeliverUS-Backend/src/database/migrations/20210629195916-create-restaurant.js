@@ -66,6 +66,10 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: new Date()
       },
+      // las relaciones entre tablas se implementan usando foreign keys
+      // definimos las propiedades de la foreign key y cómo hace referencia
+      // a las tablas relacionadas. Por ejemplo, un restaurante está relacionado
+      // con un usuario, por lo que hay que definir la siguiente clave foránea
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,

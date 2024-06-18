@@ -1,16 +1,18 @@
 import { Restaurant, Product, RestaurantCategory, ProductCategory } from '../models/models.js'
 
+// req: objeto de solicitud. Mirar detalles en apuntes word
+// res: objeto de respuesta. Mirar detalles en apuntes word
 const index = async function (req, res) {
   try {
     const restaurants = await Restaurant.findAll(
       {
-        attributes: { exclude: ['userId'] },
+        attributes: { exclude: ['userId'] }, // el exclude incluye todos los atributos del modelo excepto el que le pasamos
         include:
       {
         model: RestaurantCategory,
         as: 'restaurantCategory'
       },
-        order: [[{ model: RestaurantCategory, as: 'restaurantCategory' }, 'name', 'ASC']]
+        order: [[{ model: RestaurantCategory, as: 'restaurantCategory' }, 'name', 'ASC']] // definimos el orden en el que queremos que devuelva los resultados, en este caso estarán ordenados por categoría
       }
     )
     res.json(restaurants)
