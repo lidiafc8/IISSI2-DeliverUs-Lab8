@@ -14,12 +14,12 @@ const loadFileRoutes = function (app) {
     .get( // el verbo HTTP que queremos que esté disponible en la ruta anterior
       RestaurantController.index) // la función que atenderá las solicitudes para ese verbo HTTP y esa ruta deifnida en RestaurantController
     .post( // podemos encadenar más verbos HTTP para el mismo endpoint
-      isLoggedIn,
-      hasRole('owner'),
-      handleFilesUpload(['logo', 'heroImage'], process.env.RESTAURANTS_FOLDER),
-      RestaurantValidation.create,
-      handleValidation,
-      RestaurantController.create)
+      isLoggedIn, // verificamos que el usuario ha iniciado sesión
+      hasRole('owner'), // verificamos que el usuario tiene el rol de propietario (ya que los clientes no pueden crear restaurantes)
+      handleFilesUpload(['logo', 'heroImage'], process.env.RESTAURANTS_FOLDER), // gestionar la carga del logo del restaurante
+      RestaurantValidation.create, // verificar que los datos del restaurante incluyen valores válidos para cada propiedad para ser creados de acuerdo con nuestros requisitos de información
+      handleValidation, // gestionar la validación que hemos hecho en la anterior línea
+      RestaurantController.create) // llamar al controlador para crear el restaurante una vez comprobado todo.
 
   app.route('/restaurants/:restaurantId')
     .get(
@@ -29,7 +29,7 @@ const loadFileRoutes = function (app) {
       isLoggedIn,
       hasRole('owner'),
       checkEntityExists(Restaurant, 'restaurantId'),
-      RestaurantMiddleware.checkRestaurantOwnership,
+      RestaurantMiddleware.checkRestaurantOwnership, // comprobar que el restaurante pertenece al usuario loggeado
       handleFilesUpload(['logo', 'heroImage'], process.env.RESTAURANTS_FOLDER),
       RestaurantValidation.update,
       handleValidation,

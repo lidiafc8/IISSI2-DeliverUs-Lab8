@@ -97,6 +97,26 @@ const destroy = async function (req, res) {
   }
 }
 
+// TRANSACCIONES, FRAGMENTO DE CÓDIGO A SEGUIR, DEPENDIENDO DE LO QUE QUERAMOS HACER
+/*
+const models = require('../models')
+const EntityName = models.EntityName
+
+const someFunctionThatNeedsTransaction = async (req, res) => {
+  let newEntity = EntityName.build(req.body)
+  const transaction = await models.sequelize.transaction() // crea una transacción
+  try {
+    newEntity = await newEntity.save({transaction}) // usa la transacción en cada operación
+    await newEntity.addRelatedEntity(relatedEntityId, { through: { associatedAttribute1: value1, associatedAttributeN: valueN }, transaction }) // agregando elemento asociado a través de una tabla de asociación
+    await transaction.commit() // confirma todas las operaciones
+    res.json(newEntity)
+  } catch (err) {
+    await transaction.rollback() // en caso de error, deshacer todas las operaciones ejecutadas en el contexto de la transacción
+    res.status(500).send(err)
+  }
+}
+  */
+
 const RestaurantController = {
   index,
   indexOwner,

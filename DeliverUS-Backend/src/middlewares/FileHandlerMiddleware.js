@@ -30,6 +30,10 @@ const createMulter = (fieldNames, folder) => {
   }
 }
 
+// recibe un array de nombres de campo, correspondientes a atributos de tipo archivo para una entidad,
+// así como la ruta base del servidor donde deben almacenarse estos archivos. Es responsable de gestionar la carga de los archivos en el servidor,
+// incluyendo la generación de un nombre único para cada archivo y el almacenamiento de las rutas completas en los campos correspondientes
+// de la entidad.
 const handleFilesUpload = (fieldNames, folder) => (req, res, next) => {
   const multerInstance = createMulter(fieldNames, folder)
   multerInstance(req, res, (err) => {
