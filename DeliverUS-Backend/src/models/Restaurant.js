@@ -18,7 +18,7 @@ const loadModel = (sequelize, DataTypes) => {
       Restaurant.hasMany(models.Order, { foreignKey: 'restaurantId', as: 'orders' }) // Un restaurante tiene varios pedidos (asterisco)
     }
 
-    // Podemos definir métodos qeu realicen cálculos sobre el modelo.
+    // Podemos definir métodos que realicen cálculos sobre el modelo.
     // Por ejemplo, eeste método calcula y devuelve el tiempo de servicio promedio de un restaurante
     async getAverageServiceTime () {
       try { // en el try tenemos que definir lo que hace el método en sí

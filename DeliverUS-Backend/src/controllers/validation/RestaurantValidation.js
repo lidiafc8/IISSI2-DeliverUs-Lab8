@@ -2,7 +2,7 @@ import { check } from 'express-validator'
 import { checkFileIsImage, checkFileMaxSize } from './FileValidationHelper.js'
 const maxFileSize = 2000000 // around 2Mb
 
-const create = [
+const create = [ // array que comprueba tanto que los datos cumplan con los esquemas de datos definidos en los migrations como otras aplicaciones que nosotros le añadimos
   check('name').exists().isString().isLength({ min: 1, max: 255 }).trim(), // trim() elimina espacios al principio y al final
 
   // optional -> La validación para el campo description se aplica solo si el campo está presente en la solicitud.
@@ -25,7 +25,7 @@ const create = [
   }).withMessage('Please upload an image with format (jpeg, png).'), // mensaje de error que se enviará si la validación falla.
 
   check('heroImage').custom((value, { req }) => {
-    return checkFileMaxSize(req, 'heroImage', maxFileSize)
+    return checkFileMaxSize(req, 'heroImage', maxFileSize) // verifica si el archivo subido no supera un tamaño concreto
   }).withMessage('Maximum file size of ' + maxFileSize / 1000000 + 'MB'),
   check('logo').custom((value, { req }) => {
     return checkFileIsImage(req, 'logo')

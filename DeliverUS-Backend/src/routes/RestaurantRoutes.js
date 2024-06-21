@@ -12,7 +12,7 @@ import { Restaurant } from '../models/models.js'
 const loadFileRoutes = function (app) {
   app.route('/restaurants') // la ruta del endpoint. Definimos el endpoint '/restaurants' que responde a las solicitudes usando la función 'index' definida en RestaurantController
     .get( // el verbo HTTP que queremos que esté disponible en la ruta anterior
-      RestaurantController.index) // la función que atenderá las solicitudes para ese verbo HTTP y esa ruta deifnida en RestaurantController
+      RestaurantController.index) // la función que atenderá las solicitudes para ese verbo HTTP y esa ruta definida en RestaurantController
     .post( // podemos encadenar más verbos HTTP para el mismo endpoint
       isLoggedIn, // verificamos que el usuario ha iniciado sesión
       hasRole('owner'), // verificamos que el usuario tiene el rol de propietario (ya que los clientes no pueden crear restaurantes)

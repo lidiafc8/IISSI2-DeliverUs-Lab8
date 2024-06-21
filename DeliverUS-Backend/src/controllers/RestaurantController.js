@@ -2,7 +2,7 @@ import { Restaurant, Product, RestaurantCategory, ProductCategory } from '../mod
 
 // req: objeto de solicitud. Mirar detalles en apuntes word
 // res: objeto de respuesta. Mirar detalles en apuntes word
-const index = async function (req, res) {
+const index = async function (req, res) { // función GET para obtener todos los restaurantes
   try {
     const restaurants = await Restaurant.findAll(
       {
@@ -21,12 +21,12 @@ const index = async function (req, res) {
   }
 }
 
-const indexOwner = async function (req, res) {
+const indexOwner = async function (req, res) { // función GET para obtener todos los restaurantes de un owner
   try {
     const restaurants = await Restaurant.findAll(
       {
         attributes: { exclude: ['userId'] },
-        where: { userId: req.user.id },
+        where: { userId: req.user.id }, // usamos cláusula where para especificar el usuario concreto del que queremos obtener todos los restaurantes
         include: [{
           model: RestaurantCategory,
           as: 'restaurantCategory'
@@ -82,7 +82,7 @@ const update = async function (req, res) {
   }
 }
 
-const destroy = async function (req, res) {
+const destroy = async function (req, res) { // función DELETE de un restaurante. Devuelve un mensaje informativo
   try { // tenemos que poner una cláusula where para especificar qué restaurante en específico queremos eliminar. Le pasamos el id
     const result = await Restaurant.destroy({ where: { id: req.params.restaurantId } }) // Eliminamos el restaurante indicado. DEVUELVE EL NÚMERO DE ELEMENTOS ELIMINADOS
     let message = '' // la variable declarada con let solo estará disponible dentro del bloque en el que se define
