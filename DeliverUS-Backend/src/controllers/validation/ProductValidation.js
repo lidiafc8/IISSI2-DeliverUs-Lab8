@@ -4,7 +4,7 @@ import { checkFileIsImage, checkFileMaxSize } from './FileValidationHelper.js'
 
 const maxFileSize = 2000000 // around 2Mb
 
-const checkRestaurantExists = async (value, { req }) => {
+const checkRestaurantExists = async (value, { req }) => { // value es el campo que estamos validando, req permite acceder al objeto de solicitud
   try {
     const restaurant = await Restaurant.findByPk(req.body.restaurantId)
     if (restaurant === null) {
